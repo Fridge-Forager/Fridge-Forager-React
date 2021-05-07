@@ -1,8 +1,14 @@
-import React from 'react';
+import React from "react";
+import Dashboard from "./components/Dashboard";
+import NavBar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
-class App extends React.Component {
-  render() {
-    return (<p>This works</p>)
-  }
-}
+const App = () => (
+  <>
+    <NavBar />
+    <Dashboard />
+    <Sidebar />
+  </>
+);
+
 export default App;

@@ -1,9 +1,10 @@
 {
-  "name": "fridge-forager",
+  "name": "Fridge-Forager-React",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run server:dev",
     "build": "webpack --mode production",
     "build:dev": "webpack --watch --mode=development",
     "server": "node ./server/server.js",
@@ -12,26 +13,32 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fridge-Forager/fridge-forager.git"
+    "url": "git+https://github.com/fridge-forager/Fridge-Forager-React.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Fridge-Forager/fridge-forager/issues"
+    "url": "https://github.com/fridge-forager/Fridge-Forager-React/issues"
   },
-  "homepage": "https://github.com/Fridge-Forager/fridge-forager#readme",
+  "homepage": "https://github.com/fridge-forager/Fridge-Forager-React#readme",
   "devDependencies": {
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.0",
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "node-sass": "^5.0.0",
+    "prettier": "2.2.1",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
