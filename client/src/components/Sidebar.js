@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const Sidebar = () => {
   return (
-    <div className=>
-      <p>Sidebar works!</p>
+    <div>
+      <p className="test">Sidebar works!</p>
     </div>
   );
 };

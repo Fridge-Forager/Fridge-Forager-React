@@ -1,7 +1,7 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 
-const DIST_DIR = path.resolve(__dirname, '..', 'client', 'dist');
+const DIST_DIR = path.resolve(__dirname, "..", "client", "dist");
 
 const app = express();
 

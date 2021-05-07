@@ -4,25 +4,17 @@ module.exports = {
     es2020: true,
     node: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-  ],
+  extends: ["plugin:react/recommended", "airbnb", "prettier"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 11,
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: [
-    'react',
-  ],
-  ignorePatterns: [
-    'node_modules',
-    'fridgeForager.js',
-  ],
+  plugins: ["react"],
+  ignorePatterns: ["node_modules", "fridgeForager.js"],
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
   },
 };
