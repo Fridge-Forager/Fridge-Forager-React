@@ -1,0 +1,140 @@
+.sidebar {
+  flex: 1;
+  background-color: $lightBlue;
+}
+
+.formDiv {
+  display: flex;
+  flex-direction: row;
+  background-color: $pearl;
+}
+
+.form {
+  justify-content: flex-start;
+	width: 100%;
+	padding: 10px 15px;
+	appearance: none;
+	border: none;
+	margin-top: 15px;
+	font-size: 20px;
+	outline: none;
+}
+
+.addIngredientBtn {
+  justify-self: flex-end;
+  background-color: $blue;
+  border-radius: 10px;
+  border: 4px;
+  text-align: center;
+  padding: 5px;
+  margin: 3px;
+
+  &:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+}
+
+
+.ingredientsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+	padding: 10px 15px;
+	border-bottom: 1px solid $pearl;
+  background-color: $pearl;
+}
+
+.foodItem {
+  justify-content: flex-start;
+  font-size: larger;
+}
+
+.removeBtn {
+  justify-content: flex-end;
+  background-color: $blue;
+  border-radius: 10px;
+  border: 4px;
+  text-align: center;
+  padding: 5px;
+  margin: 3px;
+  
+  &:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+}
+
+.searchBtn{
+  justify-content: center;
+  background-color: $blue;
+  border-radius: 10px;
+  border: 4px;
+  text-align: center;
+  padding: 5px;
+  margin: 3px;
+
+  &:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+}
+
+/// input ////////////////////////////
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  margin-left: .5rem;
+  width: 80%;
+}
+
+.form__field {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: $red;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $lightBlue;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $gray;
+    font-weight:700;    
+  }
+  padding-bottom: 6px;  
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $lightBlue,$blue);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}

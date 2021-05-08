@@ -29,11 +29,14 @@ module.exports = {
         },
         {
           loader: "sass-loader",
+          options: {
+            implementation: require('sass'),
+          }
         }],
       },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx", ".scss"],
+    extensions: [".js", ".jsx", ".scss", '.css'],
   },
 };
