@@ -1,3 +1,7 @@
-@import "_colors.scss";
-@import "_fonts.scss";
-@import "_reset.scss";
+@import "colors";
+@import "fonts";
+@import "reset";
+@import 'globalStyles';
+@import "../components/sidebar/sidebar";
+@import "../components/dashboard/dashboard";
+@import '../components/navbar/navbar';
