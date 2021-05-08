@@ -1,4 +1,4 @@
 node_modules
 package-lock.json
 .DS_store
-/dist/build.js
+client/dist/build.js

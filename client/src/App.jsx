@@ -1,13 +1,15 @@
 import React from "react";
-import Dashboard from "./components/Dashboard";
-import NavBar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
+import Dashboard from "./components/dashboard/Dashboard";
+import NavBar from "./components/navbar/Navbar";
+import Sidebar from "./components/sidebar/Sidebar";
 
 const App = () => (
   <>
     <NavBar />
-    <Dashboard />
-    <Sidebar />
+    <div className="dashboard-sidebar">
+      <Sidebar />
+      <Dashboard />
+    </div>
   </>
 );
 

@@ -2,8 +2,8 @@ import React from "react";
 
 const NavBar = () => {
   return (
-    <div>
-      <p>NavBar works!</p>
+    <div className="navbar">
+      <p>Fridge Forager</p>
     </div>
   );
 };
