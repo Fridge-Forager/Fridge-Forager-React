@@ -7,11 +7,14 @@ const ingredientsSlice = createSlice({
     ingredientsList 
   },
   reducers: {
-    addIngredient: (state, action) => {
-      state.ingredientsList.add(action.payload);
+    addIngredient: (state, { payload }) => {
+      state.ingredientsList.add(payload);
     },
+    deleteIngredient: (state, { payload }) => {
+      state.ingredientsList.delete(payload);
+    }
   }
 });
 
-export const { addIngredient } = ingredientsSlice.actions;
+export const { addIngredient, deleteIngredient } = ingredientsSlice.actions;
 export default ingredientsSlice.reducer;
