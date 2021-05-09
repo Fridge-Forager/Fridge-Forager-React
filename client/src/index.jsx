@@ -1,6 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+
+import store from "./redux/store"
 import App from "./App";
 import "./globalStyles/index.scss";
 
-ReactDOM.render(<App />, document.getElementById("fridgeForager"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("fridgeForager"));

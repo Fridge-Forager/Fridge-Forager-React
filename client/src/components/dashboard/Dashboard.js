@@ -2,7 +2,7 @@ import React from "react";
 
 const Dashboard = () => {
   return (
-    <div class="dashboard col">
+    <div className="dashboard col">
       Dashboard works!
     </div>
   );

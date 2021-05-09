@@ -1,31 +1,54 @@
 /* eslint-disable react/no-array-index-key */
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
   const [ingredient, setIngredient] = useState('');
+  // const [isIngredientSet, setIngredientStatus] = useState(false);
+  const [ingredientSet, setIngredientSet] = useState(new Set);
   const [ingredientList, setIngredientList] = useState([]);
+  const [readyToSearch, setReadyToSearch] = useState(false);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (readyToSearch){
+      console.log('ready to search')
+    }
+  }, [readyToSearch]);
 
   const handleChange = (e) => {
     if (e.target.id === 'ingredient') {
-      setIngredient(e.target.value);
+      setIngredient(e.target.value.toLowerCase());
     }
   };
 
   const addIngredient = () => {
-    setIngredientList([...ingredientList, ingredient]);
+    // setIngredientList([...ingredientList, ingredient]);
+    if (!ingredientSet.has(ingredient)) {
+      setIngredientList([...ingredientList, ingredient]);
+      setIngredientSet(ingredientSet.add(ingredient))
+      setReadyToSearch(false);
+    }
     setIngredient('');
   }
 
   const deleteIngredient = (item) => {
-    setIngredientList(ingredientList.filter((e) => e !== item));
+    // setIngredientList(ingredientList.filter((e) => e !== item));
+    // dispatch(deleteIngredient(item));
+    if (ingredientSet.has(item)) {
+      setIngredientList(ingredientList.filter((e) => e !== item));
+      setIngredientSet(ingredientSet.delete(item));
+      setReadyToSearch(false);
+    }
   }
 
   const searchForRecipes = () => {
-    console.log('searched');
+    setReadyToSearch(true);
   }
 
   return (
-    <>
+    <div>
       <div className="sidebar col">
         <div className="formDiv">
           <div className="form__group">
@@ -69,7 +92,7 @@ const Sidebar = () => {
           onClick={() => searchForRecipes()}
           >Search Recipes</button>
         </div>
-    </>
+    </div>
   );
 };
 export default Sidebar;
