@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import ingredientsReducer from './ingredientsSlice';
+import ingredientsReducer from "./ingredientsSlice";
 
 export default configureStore({
   reducer: {
-    ingredients: ingredientsReducer
+    ingredients: ingredientsReducer,
   },
-})
+});

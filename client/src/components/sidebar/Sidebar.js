@@ -1,24 +1,24 @@
 /* eslint-disable react/no-array-index-key */
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
-  const [ingredient, setIngredient] = useState('');
+  const [ingredient, setIngredient] = useState("");
   // const [isIngredientSet, setIngredientStatus] = useState(false);
-  const [ingredientSet, setIngredientSet] = useState(new Set);
+  const [ingredientSet, setIngredientSet] = useState(new Set());
   const [ingredientList, setIngredientList] = useState([]);
   const [readyToSearch, setReadyToSearch] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (readyToSearch){
-      console.log('ready to search')
+    if (readyToSearch) {
+      console.log("ready to search");
     }
   }, [readyToSearch]);
 
   const handleChange = (e) => {
-    if (e.target.id === 'ingredient') {
+    if (e.target.id === "ingredient") {
       setIngredient(e.target.value.toLowerCase());
     }
   };
@@ -27,11 +27,11 @@ const Sidebar = () => {
     // setIngredientList([...ingredientList, ingredient]);
     if (!ingredientSet.has(ingredient)) {
       setIngredientList([...ingredientList, ingredient]);
-      setIngredientSet(ingredientSet.add(ingredient))
+      setIngredientSet(ingredientSet.add(ingredient));
       setReadyToSearch(false);
     }
-    setIngredient('');
-  }
+    setIngredient("");
+  };
 
   const deleteIngredient = (item) => {
     // setIngredientList(ingredientList.filter((e) => e !== item));
@@ -41,11 +41,11 @@ const Sidebar = () => {
       setIngredientSet(ingredientSet.delete(item));
       setReadyToSearch(false);
     }
-  }
+  };
 
   const searchForRecipes = () => {
     setReadyToSearch(true);
-  }
+  };
 
   return (
     <div>
@@ -57,11 +57,14 @@ const Sidebar = () => {
               className="form__field"
               placeholder="Ingredient"
               name="ingredient"
-              id="ingredient" required
+              id="ingredient"
+              required
               value={ingredient}
               onChange={handleChange}
             />
-            <label htmlFor="ingredient" className="form__label">Ingredient</label>
+            <label htmlFor="ingredient" className="form__label">
+              Ingredient
+            </label>
           </div>
           <button
             type="button"
@@ -72,26 +75,27 @@ const Sidebar = () => {
           </button>
         </div>
         <div className="ingredientsList">
-          {ingredientList.map( (item, idx) => 
-          <div key={idx.toString()+item}>
-            <div className="foodItem">{item}</div>
-            <button 
-              type="button" 
-              className="removeBtn"
-              onClick={() => deleteIngredient(item)}
-            >
+          {ingredientList.map((item, idx) => (
+            <div key={idx.toString() + item}>
+              <div className="foodItem">{item}</div>
+              <button
+                type="button"
+                className="removeBtn"
+                onClick={() => deleteIngredient(item)}
+              >
                 Remove Item
-            </button>
+              </button>
             </div>
-          )}
-          
+          ))}
         </div>
-          <button
+        <button
           type="button"
           className="searchBtn"
           onClick={() => searchForRecipes()}
-          >Search Recipes</button>
-        </div>
+        >
+          Search Recipes
+        </button>
+      </div>
     </div>
   );
 };

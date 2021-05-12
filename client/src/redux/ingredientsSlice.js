@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const ingredients = new Set();
 const ingredientsSlice = createSlice({
-  name: 'ingredients',
+  name: "ingredients",
   initialState: {
-    ingredients 
+    ingredients,
   },
   reducers: {
     addIngredient: (state, { payload }) => {
@@ -12,9 +12,12 @@ const ingredientsSlice = createSlice({
     },
     deleteIngredient: (state, { payload }) => {
       state.ingredientsList.delete(payload);
-    }
-  }
+    },
+  },
 });
 
-export const { addNewIngredient, deleteExistingIngredient } = ingredientsSlice.actions;
+export const {
+  addNewIngredient,
+  deleteExistingIngredient,
+} = ingredientsSlice.actions;
 export default ingredientsSlice.reducer;
