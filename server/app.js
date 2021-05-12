@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
@@ -9,36 +9,43 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static(DIST_DIR));
 
-function populateRecipeId(spoonacularData, recipeIds) {
+async function populateRecipeId(spoonacularData, recipeIds) {
   for (let i = 0; i < spoonacularData.length; i += 1) {
-    const currentRecipe = spoonacularData[i]
-    recipeIds.push(currentRecipe.id)
+    const currentRecipe = spoonacularData[i];
+    recipeIds.push(currentRecipe.id);
   }
 }
 
-app.get('/spoontacular', (req, res) => {
+app.get("/spoontacular", (req, res) => {
   const recipeIds = [];
   let { ingredients } = req.query;
-  
-  ingredients = ingredients.replace(/ /g, '+')
-  const findByIngredientsUrl = 'https://api.spoonacular.com/recipes/findByIngredients?';
+  let iParams = ingredients.map((ingredient, idx) => {
+    if (idx !== 0) return (ingredient = "+" + ingredient);
+    return ingredient;
+  });
+  iParams = iParams.toString();
+  const findByIngredientsUrl =
+    "https://api.spoonacular.com/recipes/findByIngredients?";
   const findByIngredientsParam = {
     apiKey: process.env.SPOONTACULAR_APIKEY,
-    ingredients,
-    number: 2
-  }
-
-  axios.get(findByIngredientsUrl,{ params: findByIngredientsParam})
-    .then((response) => {
-      const { data } = response;
+    ingredients: iParams,
+    number: 2,
+  };
+  axios
+    .get(findByIngredientsUrl, { params: findByIngredientsParam })
+    .then(({ data }) => {
       populateRecipeId(data, recipeIds);
     })
-    .catch(error => {
-      res.send('spoontacular fail')
-    })
-})
+    .then(() => res.send(recipeIds))
+    .catch((error) => {
+      res.send("spoontacular fail");
+    });
+});
+
+app.get("/spoontacular:id", (req, res) => {
+  res.send(req.params);
+});
 
 module.exports = app;

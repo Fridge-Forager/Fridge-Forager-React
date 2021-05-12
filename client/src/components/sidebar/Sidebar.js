@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const Sidebar = () => {
   const [ingredient, setIngredient] = useState("");
@@ -8,6 +9,7 @@ const Sidebar = () => {
   const [ingredientSet, setIngredientSet] = useState(new Set());
   const [ingredientList, setIngredientList] = useState([]);
   const [readyToSearch, setReadyToSearch] = useState(false);
+  const [recipeIds, setRecipeIds] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -43,9 +45,25 @@ const Sidebar = () => {
     }
   };
 
-  const searchForRecipes = () => {
+  function searchForRecipes() {
+    axios
+      .get("spoontacular", { params: { ingredients: ingredientList } })
+      .then(({ data }) => setRecipeIds(data))
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+
     setReadyToSearch(true);
-  };
+  }
 
   return (
     <div>
