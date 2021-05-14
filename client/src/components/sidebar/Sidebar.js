@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import Dashboard from "../dashboard/Dashboard";
 
 const Sidebar = () => {
   const [ingredient, setIngredient] = useState("");
@@ -9,7 +10,7 @@ const Sidebar = () => {
   const [ingredientSet, setIngredientSet] = useState(new Set());
   const [ingredientList, setIngredientList] = useState([]);
   const [readyToSearch, setReadyToSearch] = useState(false);
-  const [recipeIds, setRecipeIds] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -48,7 +49,7 @@ const Sidebar = () => {
   function searchForRecipes() {
     axios
       .get("spoontacular", { params: { ingredients: ingredientList } })
-      .then(({ data }) => console.log("sidebar", data))
+      .then(({ data }) => setRecipes(data))
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.data);
@@ -67,6 +68,7 @@ const Sidebar = () => {
 
   return (
     <div>
+      <Dashboard recipes={recipes} />
       <div className="sidebar col">
         <div className="formDiv">
           <div className="form__group">
