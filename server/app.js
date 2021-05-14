@@ -20,6 +20,8 @@ async function populateRecipeId(spoonacularData, recipeIds) {
 
 app.get("/spoontacular", (req, res) => {
   const recipeIds = [];
+  const promiseArray = [];
+  const recipes = [];
   let { ingredients } = req.query;
   let iParams = ingredients.map((ingredient, idx) => {
     if (idx !== 0) return (ingredient = "+" + ingredient);
@@ -33,12 +35,20 @@ app.get("/spoontacular", (req, res) => {
     ingredients: iParams,
     number: 2,
   };
+
   axios
     .get(findByIngredientsUrl, { params: findByIngredientsParam })
     .then(({ data }) => {
       populateRecipeId(data, recipeIds);
     })
-    .then(() => res.send(recipeIds))
+    .then(
+      () => { 
+        promiseArray = recipeIds.map((id) => {
+      const recipeByIdUrl = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false`
+      return axios.get(recipeByIdUrl)
+      })
+    })
+    .then(() => res.send(Promise.all(promiseArray.map())))
     .catch((error) => {
       res.send("spoontacular fail");
     });
@@ -49,3 +59,6 @@ app.get("/spoontacular:id", (req, res) => {
 });
 
 module.exports = app;
+
+
+// https://api.spoonacular.com/recipes/{id}/information?includeNutrition=false

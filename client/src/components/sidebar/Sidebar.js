@@ -48,7 +48,7 @@ const Sidebar = () => {
   function searchForRecipes() {
     axios
       .get("spoontacular", { params: { ingredients: ingredientList } })
-      .then(({ data }) => setRecipeIds(data))
+      .then(({ data }) => console.log('sidebar',data))
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.data);
