@@ -9,7 +9,6 @@ const App = () => (
     <NavBar />
     <div className="dashboard-sidebar">
       <Sidebar />
-      <Dashboard />
     </div>
   </div>
 );
