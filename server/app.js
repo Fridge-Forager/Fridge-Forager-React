@@ -11,17 +11,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(DIST_DIR));
 
-async function populateRecipeId(spoonacularData, recipeIds) {
+async function populateRecipeIdUrl(spoonacularData, recipeIds) {
   for (let i = 0; i < spoonacularData.length; i += 1) {
     const currentRecipe = spoonacularData[i];
-    recipeIds.push(currentRecipe.id);
+    recipeIds.push(
+      `https://api.spoonacular.com/recipes/${currentRecipe.id}/information?`
+    );
   }
 }
 
 app.get("/spoontacular", (req, res) => {
   const recipeIds = [];
-  const promiseArray = [];
-  const recipes = [];
   let { ingredients } = req.query;
   let iParams = ingredients.map((ingredient, idx) => {
     if (idx !== 0) return (ingredient = "+" + ingredient);
@@ -36,21 +36,38 @@ app.get("/spoontacular", (req, res) => {
     number: 2,
   };
 
+  const recipeByIdParams = {
+    apiKey: process.env.SPOONTACULAR_APIKEY,
+    includeNutrition: false,
+  };
+
   axios
     .get(findByIngredientsUrl, { params: findByIngredientsParam })
     .then(({ data }) => {
-      populateRecipeId(data, recipeIds);
+      populateRecipeIdUrl(data, recipeIds);
     })
-    .then(
-      () => { 
-        promiseArray = recipeIds.map((id) => {
-      const recipeByIdUrl = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false`
-      return axios.get(recipeByIdUrl)
-      })
+    .then(async () => {
+      try {
+        let promiseArray = recipeIds.map((idUrl) =>
+          axios.get(idUrl, { params: recipeByIdParams })
+        );
+        let response = await Promise.all(promiseArray.map((e) => e));
+        let data = response.map((resp) => resp.data);
+        data = data.reduce((acc, curr) => {
+          acc.push({
+            title: curr.title,
+            image: curr.image,
+            url: curr.sourceUrl,
+          });
+          return acc;
+        }, []);
+        res.status(200).send(data);
+      } catch {
+        throw Error("promise failed");
+      }
     })
-    .then(() => res.send(Promise.all(promiseArray.map())))
     .catch((error) => {
-      res.send("spoontacular fail");
+      res.status(500).send(error);
     });
 });
 
@@ -59,6 +76,5 @@ app.get("/spoontacular:id", (req, res) => {
 });
 
 module.exports = app;
-
 
 // https://api.spoonacular.com/recipes/{id}/information?includeNutrition=false
