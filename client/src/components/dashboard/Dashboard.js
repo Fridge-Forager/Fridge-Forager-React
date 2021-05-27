@@ -1,8 +1,17 @@
-import React, { useEffect } from "react";
+import React, {useState} from 'react';
+import Sidebar from '../sidebar/Sidebar';
+import Display from '../display/Display';
+import useFetchRecipes from '../../API/useFetchRecipes';
 
-const Dashboard = React.memo(({ recipes }) => {
-  console.log("Dashboard.js -- recipes:", recipes);
-  return <div className="dashboard col">Dashboard works!</div>;
-});
 
+const Dashboard = ({}) => {
+  const [recipes, setRecipes] = useFetchRecipes([]);
+
+  return (
+    <div className='dashboard'>
+      <Sidebar fetchRecipes={setRecipes}/>
+      <Display recipes={recipes}/>
+    </div>
+  );
+};
 export default Dashboard;
