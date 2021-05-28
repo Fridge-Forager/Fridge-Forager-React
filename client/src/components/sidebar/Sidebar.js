@@ -1,16 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-import Dashboard from "../dashboard/Dashboard";
 
-const Sidebar = () => {
+const Sidebar = ({fetchRecipes}) => {
   const [ingredient, setIngredient] = useState("");
-  // const [isIngredientSet, setIngredientStatus] = useState(false);
   const [ingredientSet, setIngredientSet] = useState(new Set());
   const [ingredientList, setIngredientList] = useState([]);
   const [readyToSearch, setReadyToSearch] = useState(false);
-  const [recipes, setRecipes] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -46,29 +42,8 @@ const Sidebar = () => {
     }
   };
 
-  function searchForRecipes() {
-    axios
-      .get("spoontacular", { params: { ingredients: ingredientList } })
-      .then(({ data }) => setRecipes(data))
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
-      });
-
-    setReadyToSearch(true);
-  }
-
   return (
     <div>
-      <Dashboard recipes={recipes} />
       <div className="sidebar col">
         <div className="formDiv">
           <div className="form__group">
@@ -111,7 +86,7 @@ const Sidebar = () => {
         <button
           type="button"
           className="searchBtn"
-          onClick={() => searchForRecipes()}
+          onClick={() => fetchRecipes(ingredientList)}
         >
           Search Recipes
         </button>

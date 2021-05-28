@@ -1,15 +1,11 @@
 import React from "react";
-
-import Dashboard from "./components/dashboard/Dashboard";
 import NavBar from "./components/navbar/Navbar";
-import Sidebar from "./components/sidebar/Sidebar";
+import Dashboard from './components/dashboard/Dashboard';
 
 const App = () => (
   <div>
     <NavBar />
-    <div className="dashboard-sidebar">
-      <Sidebar />
-    </div>
+    <Dashboard />
   </div>
 );
 
