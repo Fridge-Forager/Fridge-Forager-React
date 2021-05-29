@@ -4,15 +4,16 @@ module.exports = {
     es2020: true,
     node: true,
   },
-  extends: ["plugin:react/recommended", "airbnb", "plugin:prettier/recommended"],
+  extends: ["plugin:react/recommended", "airbnb", "@typescript-eslint/recommended", "prettier/@typescript-eslint", "plugin:prettier/recommended"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 11,
+    ecmaVersion: 2020,
     sourceType: "module",
   },
   plugins: [
+  "@typescript-eslint",
   "react",
   "jsx-a11y",
   "import",
@@ -21,6 +22,7 @@ module.exports = {
   ],  
   ignorePatterns: ["node_modules", "fridgeForager.js"],
   rules: {
+    "@typescript-eslint/no-empty-function": 0,
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "jsx-a11y/label-has-associated-control": ["error", {
       "required": {
@@ -44,4 +46,17 @@ module.exports = {
       }
     ]
   },
+  settings: {
+    react: {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
 };

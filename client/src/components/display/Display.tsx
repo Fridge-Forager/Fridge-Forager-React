@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, FunctionComponent } from "react";
 
-const Display = React.memo(({ recipes }) => {
+const Display: FunctionComponent = React.memo(({ recipes }) => {
   console.log("Display.js -- recipes:", recipes);
   return <div className="display col">Display works!</div>;
 });
