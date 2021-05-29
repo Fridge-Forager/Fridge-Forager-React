@@ -1,8 +1,8 @@
-import React, { useEffect, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
+import {Recipe, RecipeProps} from '../../types';
 
-const Display: FunctionComponent = React.memo(({ recipes }) => {
-  console.log("Display.js -- recipes:", recipes);
-  return <div className="display col">Display works!</div>;
+const Display: FunctionComponent<RecipeProps> = React.memo(({recipes}) => {
+  return <div className="display col">{recipes}</div>;
 });
 
 export default Display;

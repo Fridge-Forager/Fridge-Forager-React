@@ -1,8 +1,9 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, FunctionComponent } from "react";
 import { useDispatch } from "react-redux";
+import {FetchRecipesProp} from '../../types';
 
-const Sidebar = ({fetchRecipes}) => {
+const Sidebar: FunctionComponent<FetchRecipesProp> = ({fetchRecipes}) => {
   const [ingredient, setIngredient] = useState("");
   const [ingredientSet, setIngredientSet] = useState(new Set());
   const [ingredientList, setIngredientList] = useState([]);

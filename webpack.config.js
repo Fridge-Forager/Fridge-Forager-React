@@ -12,7 +12,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|tsx)$/,
         exclude: /node_modules/,
         use: [
           {
@@ -37,6 +37,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx", ".scss", '.css'],
+    extensions: [".js", ".jsx", ".scss", '.css', '.tsx', '.ts'],
   },
 };

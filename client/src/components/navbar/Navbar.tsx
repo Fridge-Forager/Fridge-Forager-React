@@ -1,6 +1,6 @@
-import React from "react";
+import React, {FunctionComponent} from "react";
 
-const NavBar = () => (
+const NavBar: FunctionComponent = () => (
   <div className="navbar">
     <p>Fridge Forager</p>
   </div>
