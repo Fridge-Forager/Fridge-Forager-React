@@ -4,26 +4,27 @@ import { useDispatch } from "react-redux";
 import {FetchRecipesProp} from '../../types';
 
 const Sidebar: FunctionComponent<FetchRecipesProp> = ({fetchRecipes}) => {
-  const [ingredient, setIngredient] = useState("");
+  const [ingredient, setIngredient] = useState<string>("");
   const [ingredientSet, setIngredientSet] = useState(new Set());
-  const [ingredientList, setIngredientList] = useState([]);
-  const [readyToSearch, setReadyToSearch] = useState(false);
+  const [ingredientList, setIngredientList] = useState<string[]>([]);
+  const [readyToSearch, setReadyToSearch] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     if (readyToSearch) {
       console.log("ready to search");
     }
   }, [readyToSearch]);
 
-  const handleChange = (e) => {
-    if (e.target.id === "ingredient") {
-      setIngredient(e.target.value.toLowerCase());
+  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
+    if (e.currentTarget.id === "ingredient") {
+      setIngredient(e.currentTarget.value.toLowerCase());
     }
   };
 
-  const addIngredient = () => {
+  const addIngredient = (): void => {
     // setIngredientList([...ingredientList, ingredient]);
     if (!ingredientSet.has(ingredient)) {
       setIngredientList([...ingredientList, ingredient]);
@@ -33,12 +34,15 @@ const Sidebar: FunctionComponent<FetchRecipesProp> = ({fetchRecipes}) => {
     setIngredient("");
   };
 
-  const deleteIngredient = (item) => {
+  const deleteIngredient = (item): void => {
     // setIngredientList(ingredientList.filter((e) => e !== item));
     // dispatch(deleteIngredient(item));
     if (ingredientSet.has(item)) {
       setIngredientList(ingredientList.filter((e) => e !== item));
-      setIngredientSet(ingredientSet.delete(item));
+      setIngredientSet(() => {
+        ingredientSet.delete(item);
+        return ingredientSet
+      });
       setReadyToSearch(false);
     }
   };
