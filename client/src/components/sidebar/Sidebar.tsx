@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState, FunctionComponent } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from '../../redux/hooks';
 import {FetchRecipesProp} from '../../types';
 
 const Sidebar: FunctionComponent<FetchRecipesProp> = ({fetchRecipes}) => {
@@ -9,9 +9,8 @@ const Sidebar: FunctionComponent<FetchRecipesProp> = ({fetchRecipes}) => {
   const [ingredientList, setIngredientList] = useState<string[]>([]);
   const [readyToSearch, setReadyToSearch] = useState<boolean>(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
 
-  
   useEffect(() => {
     if (readyToSearch) {
       console.log("ready to search");
