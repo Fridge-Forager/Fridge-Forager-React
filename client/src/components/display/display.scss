@@ -1,4 +1,6 @@
-.display {
-  flex: 3;
-  min-width: 50%;
+.display_col{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
 }

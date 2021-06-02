@@ -7,7 +7,7 @@ const Display = React.memo(() => {
   console.log("Display.js -- recipes:", Array.isArray(recipes));
   if (!Array.isArray(recipes)) return <div> </div>;
   return (
-    <div className="display col">
+    <div className="display_col">
       {recipes.map((recipe, idx) => (
         <RecipeCard key={idx} title={recipe.title} image={recipe.image} url={recipe.url} />
       ))}
