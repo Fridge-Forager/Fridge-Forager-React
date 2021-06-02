@@ -1,0 +1,18 @@
+.recipeCard {
+  background-color: $lightBlue;
+  justify-content: center;
+  padding: 5px;
+  text-align: center;
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  height: 300px;
+  width: 300px;
+  border-radius: 12%;
+  margin: 20px;
+}
+
+img {
+  width: 278px;
+  height: 185px;
+}

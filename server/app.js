@@ -23,21 +23,24 @@ async function populateRecipeIdUrl(spoonacularData, recipeIds) {
 app.get("/spoontacular", (req, res) => {
   const recipeIds = [];
   let { ingredients } = req.query;
-  let iParams = ingredients.map((ingredient, idx) => {
-    if (idx !== 0) return (ingredient = "+" + ingredient);
-    return ingredient;
-  });
-  iParams = iParams.toString();
+  // let iParams = ingredients.map((ingredient, idx) => {
+  //   if (idx !== 0) return (ingredient = "+" + ingredient);
+  //   return ingredient;
+  // });
+  // iParams = iParams.toString();
+  const apiKey = process.env.SPOONTACULAR_APIKEY;
+  ingredients = ingredients.replace(/ /i, '+')
+
   const findByIngredientsUrl =
     "https://api.spoonacular.com/recipes/findByIngredients?";
   const findByIngredientsParam = {
-    apiKey: process.env.SPOONTACULAR_APIKEY,
-    ingredients: iParams,
+    apiKey,
+    ingredients,
     number: 2,
   };
 
   const recipeByIdParams = {
-    apiKey: process.env.SPOONTACULAR_APIKEY,
+    apiKey,
     includeNutrition: false,
   };
 

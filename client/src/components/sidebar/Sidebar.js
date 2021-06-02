@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { getSpoonRecipesAsync } from "../../redux/recipesSlice"
+
 const Sidebar = ({fetchRecipes}) => {
   const [ingredient, setIngredient] = useState("");
   const [ingredientSet, setIngredientSet] = useState(new Set());
@@ -41,6 +43,10 @@ const Sidebar = ({fetchRecipes}) => {
       setReadyToSearch(false);
     }
   };
+
+  const handleSearch = (list) => {
+    dispatch(getSpoonRecipesAsync(list))
+  }
 
   return (
     <div>
@@ -86,7 +92,7 @@ const Sidebar = ({fetchRecipes}) => {
         <button
           type="button"
           className="searchBtn"
-          onClick={() => fetchRecipes(ingredientList)}
+          onClick={() => handleSearch(ingredientList)}
         >
           Search Recipes
         </button>
