@@ -5,7 +5,7 @@ export const getSpoonRecipesAsync = createAsyncThunk(
   'recipes/getSpoonRecipesAsync',
   async (list) => {
     const ingredients = list.join(",+");
-    let recipes = {};
+    let recipes = [];
     await axios
       .get("spoontacular", { params: { ingredients } })
       .then(({ data }) => {recipes = data})
@@ -18,7 +18,7 @@ export const getSpoonRecipesAsync = createAsyncThunk(
 export const recipesSlice = createSlice({
   name: 'recipes',
   initialState: {
-    recipes: {}
+    recipes: []
   },
   extraReducers: {
     [getSpoonRecipesAsync.fulfilled]: (state,action) => {

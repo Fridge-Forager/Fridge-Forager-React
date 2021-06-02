@@ -1,8 +1,18 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux"
 
-const Display = React.memo(({ recipes }) => {
-  console.log("Display.js -- recipes:", recipes);
-  return <div className="display col">Display works!</div>;
+import RecipeCard from "../recipeCard/RecipeCard"
+const Display = React.memo(() => {
+  const recipes = useSelector((state) => state.recipes)
+  console.log("Display.js -- recipes:", Array.isArray(recipes));
+  if (!Array.isArray(recipes)) return <div> </div>;
+  return (
+    <div className="display col">
+      {recipes.map((recipe, idx) => (
+        <RecipeCard key={idx} title={recipe.title} image={recipe.image} url={recipe.url} />
+      ))}
+    </div>
+  );
 });
 
 export default Display;
